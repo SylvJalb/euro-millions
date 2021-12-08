@@ -2,11 +2,19 @@ import pandas as pd
 import math
 
 # import datas
-df = pd.read_csv('../../datasource/EuroMillions_numbers.csv', sep=";")
+df = pd.read_csv('../../datasource/euromillions.csv', sep=";")
+# define types of numbers
+df['N1'] = df['N1'].astype(int)
+df['N2'] = df['N2'].astype(int)
+df['N3'] = df['N3'].astype(int)
+df['N4'] = df['N4'].astype(int)
+df['N5'] = df['N5'].astype(int)
+df['E1'] = df['E1'].astype(int)
+df['E2'] = df['E2'].astype(int)
 
 # Get apparitions times
-count_number = df['N1'].value_counts() + df['N2'].value_counts() + df['N3'].value_counts() + df['N4'].value_counts() + df['N5'].value_counts()
-count_additional_number = df['E1'].value_counts() + df['E2'].value_counts()
+count_number = df['N1'].value_counts().add(df['N2'].value_counts(), fill_value=0).add(df['N3'].value_counts(), fill_value=0).add(df['N4'].value_counts(), fill_value=0).add(df['N5'].value_counts(), fill_value=0)
+count_additional_number = df['E1'].value_counts().add(df['E2'].value_counts(), fill_value=0)
 
 # Get chance to win
 def combination(n, k):
