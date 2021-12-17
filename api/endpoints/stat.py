@@ -1,5 +1,8 @@
-import pandas as pd
 import math
+
+import pandas as pd
+
+# TEST
 
 # import datas
 df = pd.read_csv('../../datasource/euromillions.csv', sep=";")
@@ -13,12 +16,16 @@ df['E1'] = df['E1'].astype(int)
 df['E2'] = df['E2'].astype(int)
 
 # Get apparitions times
-count_number = df['N1'].value_counts().add(df['N2'].value_counts(), fill_value=0).add(df['N3'].value_counts(), fill_value=0).add(df['N4'].value_counts(), fill_value=0).add(df['N5'].value_counts(), fill_value=0)
+count_number = df['N1'].value_counts().add(df['N2'].value_counts(), fill_value=0).add(df['N3'].value_counts(),
+                                                                                      fill_value=0).add(
+    df['N4'].value_counts(), fill_value=0).add(df['N5'].value_counts(), fill_value=0)
 count_additional_number = df['E1'].value_counts().add(df['E2'].value_counts(), fill_value=0)
+
 
 # Get chance to win
 def combination(n, k):
-    return math.factorial(n) // (math.factorial(k) * math.factorial(n-k))
+    return math.factorial(n) // (math.factorial(k) * math.factorial(n - k))
+
 
 def get_chance_of_winning(numbers, additionalNumbers):
     """
@@ -36,7 +43,8 @@ def get_chance_of_winning(numbers, additionalNumbers):
     chanceOfWinningAdditionalNumbers = 1 / combination(count_additional_number.index.max(), len(additionalNumbers))
     averageChanceAdditionalNumbers = 0
     for number in additionalNumbers:
-        averageChanceAdditionalNumbers += 1 - (count_additional_number[number] - count_additional_number.mean()) / count_additional_number.sum()
+        averageChanceAdditionalNumbers += 1 - (
+                    count_additional_number[number] - count_additional_number.mean()) / count_additional_number.sum()
     averageChanceAdditionalNumbers /= len(additionalNumbers)
     chanceOfWinningAdditionalNumbers *= averageChanceAdditionalNumbers
     # return the chance of winning for all numbers
