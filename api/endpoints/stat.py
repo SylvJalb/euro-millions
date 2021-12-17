@@ -2,8 +2,6 @@ import math
 
 import pandas as pd
 
-# TEST
-
 # import datas
 df = pd.read_csv('../../datasource/euromillions.csv', sep=";")
 # define types of numbers
@@ -44,7 +42,7 @@ def get_chance_of_winning(numbers, additionalNumbers):
     averageChanceAdditionalNumbers = 0
     for number in additionalNumbers:
         averageChanceAdditionalNumbers += 1 - (
-                    count_additional_number[number] - count_additional_number.mean()) / count_additional_number.sum()
+                count_additional_number[number] - count_additional_number.mean()) / count_additional_number.sum()
     averageChanceAdditionalNumbers /= len(additionalNumbers)
     chanceOfWinningAdditionalNumbers *= averageChanceAdditionalNumbers
     # return the chance of winning for all numbers
