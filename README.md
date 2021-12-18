@@ -1,1 +1,4 @@
-# euro-millions
+# Deploy
+```bash
+./build.sh
+```
