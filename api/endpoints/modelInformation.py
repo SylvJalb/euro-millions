@@ -1,4 +1,5 @@
 from fastapi import APIRouter, Depends
+import joblib
 
 router = APIRouter(
     prefix="/api",
@@ -12,4 +13,6 @@ async def informations_model():
         Return model's informations : n_estimators, random_state and verbose which are the parameter 
         of the RandomForestClassifier we used.
     """
-    return 1
+    model = joblib.load('./api/endpoints/model/random_forest.joblib')
+    
+    return model.get_params()
