@@ -5,18 +5,17 @@ import math
 import pandas as pd
 from fastapi import APIRouter, Depends, HTTPException
 
-router = APIRouter(
-    prefix="/api",
-    tags=["predict"],
-    responses={404: {"description": "Not found"}},
-)
-
-
 maxNormalNumbers = 50
 maxStarNumbers = 12
 minNumbers = 1
 numberOfNormalNumber = 5
 numberOfStarNumber = 2
+
+router = APIRouter(
+    prefix="/api",
+    tags=["predict"],
+    responses={404: {"description": "Not found"}},
+)
 
 def isListOfUniqueElement(listOfElement: List[int]):
     dictOfNumberOfOccurrencesByElement = Counter(listOfElement)
@@ -74,7 +73,7 @@ async def get_stat(ticket):
     numbers, additionalNumbers = ticket[:5], ticket[5:]
 
     # import datas
-    df = pd.read_csv('./datasource/euromillions.csv', sep=";")
+    df = pd.read_csv('./datasource/euromillions.csv', sep=";",  header=0)
     # define types of numbers
     df['N1'] = df['N1'].astype(int)
     df['N2'] = df['N2'].astype(int)
