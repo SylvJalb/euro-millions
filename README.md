@@ -10,10 +10,10 @@ fastapi v0.650.0+
 uvicorn v0.16.0+ 
 ## QUICK START
 
--Stay in root folder ```./euro-millions```
--Run bash ``` ./build.sh``` to unzip needed files
--Run ```uvicorn main:app --reload```
--Go to http://127.0.0.1:8000/docs#/
+- Stay in root folder ```./euro-millions```  
+- Run bash ``` ./build.sh``` to unzip needed files   
+- Run ```uvicorn main:app --reload```    
+- Go to http://127.0.0.1:8000/docs#/     
 Enjoy the API :)
 ## KNOWN BUG
 
