@@ -11,6 +11,7 @@ router = APIRouter(
     responses={404: {"description": "Not found"}},
 )
 
+
 maxNormalNumbers = 50
 maxStarNumbers = 12
 minNumbers = 1
@@ -59,9 +60,12 @@ def userTicket(ticket):
 @router.post("/predict/stats", tags=["predict"])
 async def get_stat(ticket):
     """
-        Calculate the chance of winning for a given set of numbers and additional numbers (in ticket).
-        Use combinations to calculate the chance of winning.
+        Calculate the chance of winning for a given set of numbers and additional numbers (in ticket).\n
+        Use combinations to calculate the chance of winning.\n
+        The ticket should be like : N1 N2 N3 N4 N5 S1 S2\n
+        With N(ormal) numbers between 1 and 50 and the S(tars) numbers between 1 and 12
     """
+    ticket = userTicket(ticket)
     # Get chance to win
     def combination(n, k):
         return math.factorial(n) // (math.factorial(k) * math.factorial(n-k))
@@ -70,7 +74,7 @@ async def get_stat(ticket):
     numbers, additionalNumbers = ticket[:5], ticket[5:]
 
     # import datas
-    df = pd.read_csv('../datasource/euromillions.csv', sep=";")
+    df = pd.read_csv('./datasource/euromillions.csv', sep=";")
     # define types of numbers
     df['N1'] = df['N1'].astype(int)
     df['N2'] = df['N2'].astype(int)

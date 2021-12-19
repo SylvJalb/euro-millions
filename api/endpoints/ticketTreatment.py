@@ -1,13 +1,9 @@
 from collections import Counter
 from typing import *
 import joblib
-from fastapi import APIRouter, Depends, HTTPException
-
-router = APIRouter(
-    prefix="/api",
-    tags=["predict"],
-    responses={404: {"description": "Not found"}},
-)
+import math
+import pandas as pd
+from fastapi import HTTPException
 
 maxNormalNumbers = 50
 maxStarNumbers = 12
@@ -52,20 +48,3 @@ def userTicket(ticket):
     combinationValues = normalNumberList + starNumberList
 
     return combinationValues
-
-
-@router.post("/predict", tags=["predict"])
-async def get_ml_stat(ticket):
-    """
-        Calculate the chance of winning for a given set of numbers and additional numbers (in ticket).\n
-        Use machine learning model to calculate the chance of winning.\n
-        The ticket should be like : N1 N2 N3 N4 N5 S1 S2\n
-        With N(ormal) numbers between 1 and 50 and the S(tars) numbers between 1 and 12
-    """
-    ticket = userTicket(ticket)
-    # Load the model from the file
-    model = joblib.load('./api/endpoints/model/random_forest.joblib')
-    # Predict the result
-    result = model.predict_proba([ticket])[0]
-    # Return the result (chance to win)
-    return result[1]
