@@ -62,15 +62,22 @@ def userTicket(ticket):
 async def add_data(date, ticket, winner, gain):
     """
         Add one more data to the data set. You should give : \n
-        -- A date : yyyy-mm-dd\n
-        -- A ticket should be like : N1 N2 N3 N4 N5 S1 S2\n
+        -- date (str) : yyyy-mm-dd\n
+        -- ticket (str) : should be like <N1 N2 N3 N4 N5 S1 S2> (separator must be spaces)\n
         With N(ormal) numbers between 1 and 50 and the S(tars) numbers between 1 and 12\n
-        -- A winner : number of winners\n
-        -- A gain : any number without any symbol\n
+        -- winner (str) : number of winners \n
+        -- gain (str) : any number without any symbol\n
     """
 
-    winner = int(winner)
-    gain = int(gain)
+    if type(winner) == str:
+        winner = int(winner)
+    else:
+        raise HTTPException(status_code=404, detail="The winner is not a simple number.")
+    if type(gain) == str:
+        gain = int(gain)
+    else:
+        raise HTTPException(status_code=404, detail="The gain is not a simple number.")
+    
     ticket = userTicket(ticket)
 
     # Build datas
@@ -101,4 +108,5 @@ async def add_data(date, ticket, winner, gain):
     model.fit(generations[1:], ['lose'] * (nbrLostRows))
     # Save the model to the file
     joblib.dump(model, './api/endpoints/model/random_forest.joblib')
+    raise HTTPException(status_code=200, detail="Data successfully added !")
 

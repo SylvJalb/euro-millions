@@ -10,7 +10,7 @@ Euromillion App API helps you to win (we hope). 🚀
 You can :
 
 * **Find the probabilities of a winning ticket**.
-* **Generate an "high probability of winning" tiket**.
+* **Generate an "high probability of winning" ticket**.
 
 ## Model
 
@@ -25,12 +25,13 @@ You can :
 app = FastAPI(
     title="EuromillionApp",
     description=description,
-    version="0.0.1",
+    version="1.0.0",
     contact={
         "name": "Sylvain Jalbert & Romain Royer",
     },
 )
 
+# include routes
 app.include_router(predictWinningTicketML.router)
 app.include_router(predictWinningTicketStats.router)
 app.include_router(modelRetrain.router)

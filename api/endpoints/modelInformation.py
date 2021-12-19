@@ -10,8 +10,7 @@ router = APIRouter(
 @router.get("/model", tags=["model"])
 async def informations_model():
     """
-        Return model's informations : n_estimators, random_state and verbose which are the parameter 
-        of the RandomForestClassifier we used.
+        Return model's informations : the parameter of the RandomForestClassifier we used.
     """
     model = joblib.load('./api/endpoints/model/random_forest.joblib')
     
