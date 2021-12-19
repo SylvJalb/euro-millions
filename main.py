@@ -26,15 +26,8 @@ app = FastAPI(
     title="EuromillionApp",
     description=description,
     version="0.0.1",
-    terms_of_service="",
     contact={
         "name": "Sylvain Jalbert & Romain Royer",
-        "url": "",
-        "email": "email",
-    },
-    license_info={
-        "name": "",
-        "url": "",
     },
 )
 
